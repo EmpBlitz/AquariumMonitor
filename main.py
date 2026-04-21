@@ -67,7 +67,7 @@ def simulate(tankId: str, count: int):
         savedR.append(reading)
 
     return {
-        "message": f"{count} number of readings was generated for tank {tankId}"}
+        "message": f"{count} number of readings was generated for tank {tankId}"}, savedR
 
 # Endpoint to clear all readings from the data file
 @app.delete("/readings/clear")

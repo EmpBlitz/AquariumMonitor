@@ -22,7 +22,7 @@ def evalReading(tankId, temperature, ph, waterLevel):
 
     return {
         "tankId": tankId,
-        "timestamp": datetime.now().isoformat(),
+        "timestamp": datetime.now().strftime("%d/%m/%y %H:%M:%S"),
         "temperature": temperature,
         "ph": ph,
         "waterLevel": waterLevel,
@@ -32,7 +32,7 @@ def evalReading(tankId, temperature, ph, waterLevel):
 # Function to generate random readings for a specific tank
 def readGen(tankId):
     
-    temperature = round(random.uniform(20.0,30.0), 2)
-    ph = round(random.uniform(6.0,8.5), 2)
-    waterLevel = round(random.uniform(20.0, 50.0), 2)
+    temperature = round(random.uniform(20.0,30.0), 1)
+    ph = round(random.uniform(6.0,8.5), 1)
+    waterLevel = round(random.uniform(20.0, 50.0), 1)
     return evalReading(tankId, temperature, ph, waterLevel)

@@ -1,18 +1,11 @@
 #!/usr/bin/env python3
 
 from fastapi import FastAPI
-from pydantic import BaseModel
 from simulator import readGen, evalReading
-from storage import openReadings, saveReadings, getTankReading, getAlertReadings, getTankAlert
+from storage import openReadings, saveReadings, getTankReading, getAlertReadings, getTankAlert, clearReadings
 
 app = FastAPI()
 
-# Define Pydantic model for user input
-class UsrReading(BaseModel):
-    tankId: str
-    temperature: float
-    ph: float
-    waterLevel: float
 
 # Define API endpoints
 @app.get("/")
@@ -33,13 +26,13 @@ def createSimulatedReading(tankId: str):
 
 # Endpoint to create a reading from user input
 @app.post("/readings/usr")
-def createReading(reading: UsrReading):
-    evalR = evalReading(
-        reading.tankId,
-        reading.temperature,
-        reading.ph,
-        reading.waterLevel
-    )
+def createReading(
+    tankId: str,
+    temperature: float,
+    ph: float,
+    waterLevel: float
+):
+    evalR = evalReading(tankId, temperature, ph, waterLevel)
     saveReadings(evalR)
     return evalR
 
@@ -75,3 +68,9 @@ def simulate(tankId: str, count: int):
 
     return {
         "message": f"{count} number of readings was generated for tank {tankId}"}
+
+# Endpoint to clear all readings from the data file
+@app.delete("/readings/clear")
+def clear_all_readings():
+    clearReadings()
+    return {"message": "All readings cleared."}

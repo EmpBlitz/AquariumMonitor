@@ -49,3 +49,9 @@ def getTankAlert(tankId):
         if i["tankId"] == tankId and i["status"] == "ALERT":
             tankAlerts.append(i)
     return tankAlerts
+
+# Function to clear all readings from the data file
+def clearReadings():
+    DataFile.parent.mkdir(exist_ok=True)
+    with open(DataFile, "w") as f:
+        json.dump([], f, indent=4)

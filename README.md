@@ -43,11 +43,6 @@ http://127.0.0.1:8000
 ```
 
 ## API Endpoints
-
-### Basic
-
-- `GET /` - welcome message
-
 ### Readings
 
 - `GET /reading/{tankId}` - create and save one simulated reading

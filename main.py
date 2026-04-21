@@ -12,17 +12,25 @@ app = FastAPI()
 def home():
     return {"message": "Welcome to Aquarium Monitor API"}
 
-# Health check endpoint
-@app.get("/health")
-def health_check():
-    return {"status": "healthy"}
-
-# Endpoint to create a simulated reading for a specific tank
+# Endpoint to generate a simulated reading for a single specific tank
 @app.get("/reading/{tankId}")
 def createSimulatedReading(tankId: str):
     reading = readGen(tankId)
     saveReadings(reading)
     return reading
+
+# Endpoint to generate multiple readings for a specific tank
+@app.get("/generate/{tankId}/{count}")
+def simulate(tankId: str, count: int):
+    savedR = []
+
+    for i in range(count):
+        reading = readGen(tankId)
+        saveReadings(reading)
+        savedR.append(reading)
+
+    return {
+        "message": f"{count} number of readings was generated for tank {tankId}"}, savedR
 
 # Endpoint to create a reading from user input
 @app.post("/readings/usr")
@@ -56,18 +64,6 @@ def getAlerts():
 def getTankAlerts(tankId: str):
     return getTankAlert(tankId)
 
-# Endpoint to simulate multiple readings for a specific tank
-@app.get("/simulate/{tankId}/{count}")
-def simulate(tankId: str, count: int):
-    savedR = []
-
-    for i in range(count):
-        reading = readGen(tankId)
-        saveReadings(reading)
-        savedR.append(reading)
-
-    return {
-        "message": f"{count} number of readings was generated for tank {tankId}"}, savedR
 
 # Endpoint to clear all readings from the data file
 @app.delete("/readings/clear")

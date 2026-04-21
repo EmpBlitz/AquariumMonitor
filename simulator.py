@@ -1,14 +1,7 @@
 import random
-import datetime
+from datetime import datetime
 
-def readGen(tankId):
-    
-    temperature = round(random.uniform(20.0,30.0), 2)
-    ph = round(random.uniform(6.0,8.5), 2)
-    waterLevel = round(random.uniform(20.0, 50.0), 2)
-    return eval(tankId, temperature, ph, waterLevel)
-
-def eval(tankID, temperature, ph, waterLevel):
+def evalReading(tankID, temperature, ph, waterLevel):
     alert = []
 
     if temperature < 24 or temperature > 27:
@@ -20,14 +13,25 @@ def eval(tankID, temperature, ph, waterLevel):
     if waterLevel < 25:
         alert.append(f"Low water level: {waterLevel} cm")
 
-    status = "Healthy" if not alert else "ALERT"
+    if alert:
+        status = "ALERT"
+    else:
+        status = "Healthy"
+        alert.append("All indicators are normal")
 
     return {
         "tankId": tankID,
-        "timestamp": datetime.datetime.now().isoformat(),
+        "timestamp": datetime.now().isoformat(),
         "temperature": temperature,
         "ph": ph,
         "waterLevel": waterLevel,
         "status": status,
         "alerts": alert
     }
+
+def readGen(tankId):
+    
+    temperature = round(random.uniform(20.0,30.0), 2)
+    ph = round(random.uniform(6.0,8.5), 2)
+    waterLevel = round(random.uniform(20.0, 50.0), 2)
+    return evalReading(tankId, temperature, ph, waterLevel)

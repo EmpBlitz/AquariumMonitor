@@ -12,14 +12,14 @@ def openReadings():
     except json.JSONDecodeError:
         return []
 
-def saveReadings(readings):
-    readings = openReadings()
-    readings.append(readings)
+def saveReadings(newReading):
+    allReadings = openReadings()
+    allReadings.append(newReading)
 
     DataFile.parent.mkdir(exist_ok=True)
 
     with open(DataFile, "w") as f:
-        json.dump(readings, f, indent = 4)
+        json.dump(allReadings, f, indent = 4)
 
 def getTankReading(tankId):
     readings = openReadings()

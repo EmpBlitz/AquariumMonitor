@@ -1,7 +1,8 @@
 import random
 from datetime import datetime
 
-def evalReading(tankID, temperature, ph, waterLevel):
+# Simulate sensor readings and evaluate them against thresholds
+def evalReading(tankId, temperature, ph, waterLevel):
     alert = []
 
     if temperature < 24 or temperature > 27:
@@ -20,7 +21,7 @@ def evalReading(tankID, temperature, ph, waterLevel):
         alert.append("All indicators are normal")
 
     return {
-        "tankId": tankID,
+        "tankId": tankId,
         "timestamp": datetime.now().isoformat(),
         "temperature": temperature,
         "ph": ph,
@@ -28,7 +29,7 @@ def evalReading(tankID, temperature, ph, waterLevel):
         "status": status,
         "alerts": alert
     }
-
+# Function to generate random readings for a specific tank
 def readGen(tankId):
     
     temperature = round(random.uniform(20.0,30.0), 2)

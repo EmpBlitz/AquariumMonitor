@@ -3,6 +3,7 @@ from pathlib import Path
 
 DataFile = Path("data/readings.json")
 
+# Functions to handle reading storage and retrieval
 def openReadings():
     if not DataFile.exists():
         return []
@@ -12,6 +13,7 @@ def openReadings():
     except json.JSONDecodeError:
         return []
 
+# Function to save a new reading to the data file
 def saveReadings(newReading):
     allReadings = openReadings()
     allReadings.append(newReading)
@@ -21,6 +23,7 @@ def saveReadings(newReading):
     with open(DataFile, "w") as f:
         json.dump(allReadings, f, indent = 4)
 
+# Functions to filter readings based on tank ID and alert status
 def getTankReading(tankId):
     readings = openReadings()
     tankReadings = []
@@ -29,6 +32,7 @@ def getTankReading(tankId):
             tankReadings.append(i)
     return tankReadings
 
+# Function to filter readings that have an alert status
 def getAlertReadings():
     readings = openReadings()
     alertReadings = []
@@ -37,6 +41,7 @@ def getAlertReadings():
             alertReadings.append(i)
     return alertReadings
 
+# Function to filter alert readings for a specific tank
 def getTankAlert(tankId):
     readings = openReadings()
     tankAlerts = []

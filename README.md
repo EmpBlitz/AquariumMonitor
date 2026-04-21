@@ -1,6 +1,6 @@
 # Aquarium Monitor API
 
-A FastAPI project for simulating aquarium tank readings, storing them in a JSON file, and checking whether a tank is healthy or in alert state.
+A small FastAPI project for simulating aquarium tank readings, storing them in a JSON file, and checking whether a tank is healthy or in alert state.
 
 ## Features
 

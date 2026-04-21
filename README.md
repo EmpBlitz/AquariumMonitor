@@ -64,7 +64,7 @@ http://127.0.0.1:8000
 
 ## Alert Rules
 
-A reading is marked as `ALERT` when:
+A reading is marked as `ALERT` when tanks:
 
 - temperature is below 24C or above 27C
 - pH is below 6.5 or above 7.5

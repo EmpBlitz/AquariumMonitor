@@ -1,5 +1,5 @@
 # Aquarium Monitor API
-![workflow](https://github.com/EmpBlitz/AquariumMonitor/actions/workflows/workflow.yml/badge.svg)
+[![workflow](https://github.com/EmpBlitz/AquariumMonitor/actions/workflows/workflow.yml/badge.svg)](https://github.com/EmpBlitz/AquariumMonitor/actions/workflows/workflow.yml)
 
 A small FastAPI project for simulating aquarium tank readings, storing them in a JSON file, and checking whether a tank is healthy or in alert state.
 

@@ -30,7 +30,9 @@ def simulate(tankId: str, count: int):
         savedR.append(reading)
 
     return {
-        "message": f"{count} number of readings was generated for tank {tankId}"}, savedR
+        "message": f"{count} number of readings was generated for tank {tankId}",
+        "readingsSaved": savedR
+    }
 
 # Endpoint to create a reading from user input
 @app.post("/readings/usr")
